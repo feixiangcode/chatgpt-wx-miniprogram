@@ -93,7 +93,8 @@
                             msg: "你好呀,想问什么就问吧"
                         }],
                         msgContent: "",
-                        msg: ""
+                        msg: "",
+                        risk:0,
                     }
                 },
                 methods: {
@@ -115,10 +116,15 @@
                         console.log(this.msgContent),
                         this.msgLoad = 1,
                         this.msg = "";
-                        var e = JSON.stringify({
+                        var reqData = {
                             model:'gpt-3.5-turbo',
                             messages:[{role:"user",content:this.msgContent}]
-                        });
+                        }
+                        if(this.risk > 0) {
+                            reqData.moderation = true
+                            reqData.moderation_stop = true
+                        }
+                        var e = JSON.stringify(reqData);
                         t.request({
                             url: s.apiurl,
                             data: e,
@@ -139,8 +145,14 @@
                                     s.msgContent += e + "\n",
                                     s.msgLoad = 0,
                                     s.sentext = "发送"
-                                } else s.apibut = "连接失败",
-                                s.apisucc = 0
+                                } else {
+                                    s.msgList.push({
+                                        msg: "网络请重试",
+                                        my: 1
+                                    })
+                                    s.msgLoad = 0,
+                                    s.sentext = "发送"
+                                }
                             }
                         })
                     }
