@@ -1,4 +1,4 @@
-![image](https://github.com/feixiangcode/chatgpt-wx-miniprogram/blob/master/static/Snip20230320_10.png)
+![image](https://github.com/feixiangcode/chatgpt-wx-miniprogram/blob/master/static/img.jpg)
 ### 一个简单的基于chatgpt开发的小程序
 ##### 前台的小程序是基于 https://github.com/smallnew666/ChatGPT-wxapp 修改
 ##### 后台是接入的中间服务 https://api2d.com/ 
